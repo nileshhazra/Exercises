@@ -1,16 +1,15 @@
 package com.nileshhazra;
 import java.text.NumberFormat;
 import java.util.Locale;
-import java.util.Scanner;
 
 public class Main {
     final static byte MONTHS_IN_YEAR = 12;
     final static byte PERCENT = 100;
     public static void main(String[] args) {
 
-        int principal = (int) readNumber("Principal ($1K - $1M): ", 1000, 1_000_000);
-        float annualInterest = (float) readNumber("Annual Interest Rate (1-30): ", 1, 30);
-        byte years = (byte) readNumber("Period(Years 1-30): ", 1, 30);
+        int principal = (int) Console.readNumber("Principal ($1K - $1M): ", 1000, 1_000_000);
+        float annualInterest = (float) Console.readNumber("Annual Interest Rate (1-30): ", 1, 30);
+        byte years = (byte) Console.readNumber("Period(Years 1-30): ", 1, 30);
 
         printMortgage(principal, annualInterest, years);
         printPaymentSchedule(principal, annualInterest, years);
@@ -35,20 +34,6 @@ public class Main {
             double balance = calculateBalance(principal, annualInterest, years, month);
             System.out.println(NumberFormat.getCurrencyInstance(Locale.US).format(balance));
         }
-    }
-
-
-    public static double readNumber(String prompt, double min, double max) {
-        Scanner scanner = new Scanner(System.in);
-        double value;
-        while (true) {
-            System.out.print(prompt);
-            value = scanner.nextDouble();
-            if(value>=min && value<=max)
-                break;
-            System.out.println("Accept value between " + min + " and " + max);
-        }
-        return value;
     }
 
 
